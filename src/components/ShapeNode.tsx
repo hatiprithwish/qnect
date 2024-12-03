@@ -33,7 +33,9 @@ const ShapeNode = ({
 }) => {
   const { setNodes } = useReactFlow();
   const [size, setSize] = useState({
+    // @ts-ignore
     width: other?.style?.width || data?.size?.width || 76,
+    // @ts-ignore
     height: other?.style?.height || data?.size?.height || 76,
   });
   const [color, setColor] = useState(data?.color);

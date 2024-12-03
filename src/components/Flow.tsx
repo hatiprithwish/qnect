@@ -76,6 +76,7 @@ const Flow = ({ initialNodes = [], initialEdges = [] }) => {
         nodeTypes={nodeTypes as any}
         edgeTypes={edgeTypes}
         fitView
+        //@ts-ignore
         connectionMode="loose"
       >
         <Background />

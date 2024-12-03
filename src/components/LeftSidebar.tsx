@@ -1,5 +1,4 @@
 import { DragEvent, useRef } from "react";
-import DraggableNode from "./DraggableNode";
 import { SHAPES } from "./Shapes";
 
 const LeftSidebar = () => {

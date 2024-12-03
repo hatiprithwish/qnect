@@ -285,7 +285,7 @@ const ArrowRectangleIcon: React.FC = ({
         <path
           d="M0,0 L23.4,0 L26,13 L23.4,26 L0,26 Z"
           fill="transparent"
-          stroke={color}
+          stroke={stroke}
           strokeWidth="1"
         ></path>
       </g>
