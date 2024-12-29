@@ -16,9 +16,12 @@ import "@xyflow/react/dist/style.css";
 import { edgeTypes } from "../edges";
 import { nanoid } from "nanoid";
 import ShapeNode from "./ShapeNode";
+import IconNode from "./IconNode";
+import { icons } from "../constants";
 
 const nodeTypes = {
   shape: ShapeNode,
+  icon: IconNode,
 };
 
 const Flow = ({ initialNodes = [], initialEdges = [] }) => {
@@ -46,7 +49,7 @@ const Flow = ({ initialNodes = [], initialEdges = [] }) => {
 
       const newNode: any = {
         id: nodeID,
-        type: "shape",
+        type: icons.includes(type) ? "icon" : "shape",
         position,
         data: { label: type, type: type },
       };
