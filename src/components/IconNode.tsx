@@ -21,7 +21,6 @@ const IconNode = ({
     // @ts-ignore
     height: other?.style?.height || data?.size?.height || 76,
   });
-  const [label, setLabel] = useState(data.label || "");
 
   const onResize = useDebouncedCallback((_, payload) => {
     const { width, height } = payload;
