@@ -1,7 +1,8 @@
 import type { Edge, EdgeTypes } from "@xyflow/react";
+import LabelledNode from "./LabelledNode";
 
 export const initialEdges: Edge[] = [];
 
 export const edgeTypes = {
-  // Add your custom edge types here!
+  labelled: LabelledNode,
 } satisfies EdgeTypes;
