@@ -1,54 +1,63 @@
-![](https://github.com/xyflow/web/blob/main/assets/codesandbox-header-ts.png?raw=true)
+##### Backend Repo: https://github.com/hatiprithwish/qnect_server
 
-# React Flow starter (Vite + TS)
+# Qnect
 
-We've put together this template to serve as a starting point for folks
-interested in React Flow. You can use this both as a base for your own React
-Flow applications, or for small experiments or bug reports.
+Qnect is a web application that allows users to create, save, and share flowcharts. It provides a drag-and-drop interface for adding various shapes and icons to the flowchart, and supports exporting the flowchart in different formats.
 
-**TypeScript not your thing?** We also have a vanilla JavaScript starter template,
-just for you!
+## Features
 
-## Getting up and running
+- **Drag and Drop**: Easily add shapes and icons to the flowchart by dragging and dropping them from the sidebar.
+- **Save and Restore**: Save your flowchart progress and restore it later.
+- **Export**: Export the flowchart as JPEG, PNG, or SVG.
+- **Share**: Generate a shareable link for your flowchart.
 
-You can get this template without forking/cloning the repo using `degit`:
+## Installation
 
-```bash
-npx degit xyflow/vite-react-flow-template your-app-name
-```
+1. Clone the repository:
 
-The template contains mostly the minimum dependencies to get up and running, but
-also includes eslint and some additional rules to help you write React code that
-is less likely to run into issues:
+   ```sh
+   git clone https://github.com/yourusername/qnect.git
+   cd qnect/qnect-client
+   ```
 
-```bash
-npm install # or `pnpm install` or `yarn install`
-```
+2. Install dependencies:
 
-Vite is a great development server and build tool that we recommend our users to
-use. You can start a development server with:
+   ```sh
+   npm install
+   ```
 
-```bash
-npm run dev
-```
+3. Create a `.env.local` file in the root directory and add the following environment variables:
 
-While the development server is running, changes you make to the code will be
-automatically reflected in the browser!
+   ```env
+   VITE_CLIENT_URL=http://localhost:5173/
+   VITE_SERVER_URL=http://localhost:5994/api/v1/
+   ```
 
-## Things to try:
+4. Start the development server:
+   ```sh
+   npm run dev
+   ```
 
-- Create a new custom node inside `src/nodes/` (don't forget to export it from `src/nodes/index.ts`).
-- Change how things look by [overriding some of the built-in classes](https://reactflow.dev/learn/customization/theming#overriding-built-in-classes).
-- Add a layouting library to [position your nodes automatically](https://reactflow.dev/learn/layouting/layouting)
+## Usage
 
-## Resources
+1. Open your browser and navigate to `http://localhost:5173`.
+2. Use the sidebar to drag and drop shapes and icons onto the canvas.
+3. Save your progress, export the flowchart, or generate a shareable link using the top bar.
 
-Links:
+## Project Structure
 
-- [React Flow - Docs](https://reactflow.dev)
-- [React Flow - Discord](https://discord.com/invite/Bqt6xrs)
+- `src/`: Contains the source code for the application.
+  - `components/`: Contains React components used in the application.
+  - `pages/`: Contains the main pages of the application.
+  - `constants/`: Contains constant values used throughout the application.
+  - `lib/`: Contains utility functions.
+- `public/`: Contains static assets.
+- `index.html`: The main HTML file.
+- `package.json`: Contains the project dependencies and scripts.
+- `tailwind.config.js`: Tailwind CSS configuration file.
+- `tsconfig.json`: TypeScript configuration file.
+- `.eslintrc.cjs`: ESLint configuration file.
 
-Learn:
+## License
 
-- [React Flow – Custom Nodes](https://reactflow.dev/learn/customization/custom-nodes)
-- [React Flow – Layouting](https://reactflow.dev/learn/layouting/layouting)
+This project is licensed under the MIT License.
