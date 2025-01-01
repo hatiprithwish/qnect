@@ -27,9 +27,9 @@ const LeftSidebar = () => {
           return (
             <div
               key={shape_type}
-              className="sidebar-item"
               onDragStart={(event) => onDragStart(event, shape_type, ref)}
               draggable
+              className="hover:cursor-grab"
             >
               <Icon />
               <div

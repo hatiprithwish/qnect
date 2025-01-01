@@ -88,21 +88,10 @@ const ShapeNode = ({
               key={`source-${position}`}
               id={`source-${position}`}
               type="source"
-              className={cn("z-50 w-1.5 h-1.5", !selected ? "invisible" : "")}
-              style={{ backgroundColor: color }}
-              position={position}
-            />
-          );
-        }
-      )}
-      {[Position.Top, Position.Left, Position.Right, Position.Bottom].map(
-        (position) => {
-          return (
-            <Handle
-              key={`target-${position}`}
-              id={`target-${position}`}
-              type="target"
-              className={cn("z-50 w-1.5 h-1.5", !selected ? "invisible" : "")}
+              className={cn(
+                "z-50 w-1.5 h-1.5",
+                selected ? "visible" : "invisible"
+              )}
               style={{ backgroundColor: color }}
               position={position}
             />

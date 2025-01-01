@@ -56,23 +56,10 @@ const IconNode = ({
               key={`source-${position}`}
               id={`source-${position}`}
               type="source"
-              className={cn("z-50 w-1.5 h-1.5", !selected ? "invisible" : "")}
-              style={{ backgroundColor: "black" }}
-              position={position}
-            />
-          );
-        }
-      )}
-
-      {[Position.Top, Position.Left, Position.Right, Position.Bottom].map(
-        (position) => {
-          return (
-            <Handle
-              key={`target-${position}`}
-              id={`target-${position}`}
-              type="target"
-              className={cn("z-50 w-1.5 h-1.5", !selected ? "invisible" : "")}
-              style={{ backgroundColor: "black" }}
+              className={cn(
+                "z-50 w-1.5 h-1.5 bg-slate-800",
+                selected ? "visible" : "invisible"
+              )}
               position={position}
             />
           );
