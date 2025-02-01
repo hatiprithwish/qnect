@@ -1,8 +1,6 @@
-import type { Edge, EdgeTypes } from "@xyflow/react";
-import LabelledNode from "./LabelledNode";
-
-export const initialEdges: Edge[] = [];
+import type { EdgeTypes } from "@xyflow/react";
+import LabelledEdge from "./LabelledEdge";
 
 export const edgeTypes = {
-  labelled: LabelledNode,
+  labelled: LabelledEdge,
 } satisfies EdgeTypes;

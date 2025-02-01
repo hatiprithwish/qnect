@@ -1,3 +1,5 @@
+import { XIcon } from "lucide-react";
+
 const Modal = ({
   children,
   isOpen,
@@ -18,6 +20,10 @@ const Modal = ({
         className="bg-white p-6 rounded-lg shadow-lg relative"
         onClick={(e) => e.stopPropagation()}
       >
+        <XIcon
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 text-xs cursor-pointer"
+        />
         {children}
       </div>
     </div>

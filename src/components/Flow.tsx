@@ -25,6 +25,7 @@ import Modal from "./ui/Modal";
 import { CopyIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import ShareForm from "./ShareForm";
 
 const Flow = ({
   initialNodes = [],
@@ -100,7 +101,13 @@ const Flow = ({
         const flow = reactFlowRef.toObject();
         const response = await axios.post(
           `${import.meta.env.VITE_SERVER_URL}flow`,
-          { flow: JSON.stringify(flow) }
+          { flow: JSON.stringify(flow) },
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
         setFlowId(response.data.data);
       }
@@ -144,18 +151,6 @@ const Flow = ({
     } catch (error: any) {
       `Error in generating sharing link: ${error.message}`;
     }
-  };
-
-  const handleCopyLink = () => {
-    const link = `http://localhost:5173/${flowId}`;
-    navigator.clipboard
-      .writeText(link)
-      .then(() => {
-        toast.success("Link copied to clipboard!");
-      })
-      .catch((error) => {
-        toast.error("Failed to copy link: ", error);
-      });
   };
 
   return (
@@ -205,7 +200,7 @@ const Flow = ({
       </ReactFlow>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <div className="flex gap-2 items-center justify-center">
+        {/* <div className="flex gap-2 items-center justify-center">
           <Link
             to={`${flowId}`}
             className="underline hover:text-blue-500 transition-colors"
@@ -218,7 +213,8 @@ const Flow = ({
           >
             <CopyIcon />
           </button>
-        </div>
+        </div> */}
+        <ShareForm flowId={flowId} />
       </Modal>
     </div>
   );
