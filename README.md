@@ -1,63 +1,48 @@
-##### Backend Repo: https://github.com/hatiprithwish/qnect_server
+# Qnect - System Design Judge
 
-# Qnect
+A web-based platform that allows developers to create, visualize and validate system design diagrams with AI-powered feedback.
 
-Qnect is a web application that allows users to create, save, and share flowcharts. It provides a drag-and-drop interface for adding various shapes and icons to the flowchart, and supports exporting the flowchart in different formats.
+## Overview
+
+Qnect is an interactive system design tool that helps developers:
+
+- Create system architecture diagrams with an intuitive drag-and-drop interface
+- Use pre-built components like API Gateways, Databases, Load Balancers etc.
+- Get real-time AI feedback on design patterns, scalability and best practices
+- Learn system design through detailed recommendations and improvements
 
 ## Features
 
-- **Drag and Drop**: Easily add shapes and icons to the flowchart by dragging and dropping them from the sidebar.
-- **Save and Restore**: Save your flowchart progress and restore it later.
-- **Export**: Export the flowchart as JPEG, PNG, or SVG.
-- **Share**: Generate a shareable link for your flowchart.
+### Component Library
 
-## Installation
+- Extensive collection of common system design components including:
+  - Infrastructure (AWS, Azure, GCP, Kubernetes)
+  - Databases (MongoDB, PostgreSQL, Redis)
+  - Network (Load Balancer, API Gateway, CDN)
+  - And many more...
 
-1. Clone the repository:
+### Interactive Design Canvas
 
-   ```sh
-   git clone https://github.com/yourusername/qnect.git
-   cd qnect/qnect-client
-   ```
+- Drag-and-drop interface using [ReactFlow](https://reactflow.dev)
+- Connect components with labeled edges
+- Resize and customize components
+- Mini-map for easy navigation
+- Zoom and pan controls
 
-2. Install dependencies:
+### AI Design Evaluation
 
-   ```sh
-   npm install
-   ```
+The backend evaluates designs and provides feedback on:
 
-3. Create a `.env.local` file in the root directory and add the following environment variables:
+- Must-have components for the system
+- Good-to-have components for scalability
+- Prohibited component connections
+- Recommended connection patterns
+- Best practices and improvements
 
-   ```env
-   VITE_CLIENT_URL=http://localhost:5173/
-   VITE_SERVER_URL=http://localhost:5994/api/v1/
-   ```
+## Getting Started
 
-4. Start the development server:
-   ```sh
-   npm run dev
-   ```
+1. Install dependencies:
 
-## Usage
-
-1. Open your browser and navigate to `http://localhost:5173`.
-2. Use the sidebar to drag and drop shapes and icons onto the canvas.
-3. Save your progress, export the flowchart, or generate a shareable link using the top bar.
-
-## Project Structure
-
-- `src/`: Contains the source code for the application.
-  - `components/`: Contains React components used in the application.
-  - `pages/`: Contains the main pages of the application.
-  - `constants/`: Contains constant values used throughout the application.
-  - `lib/`: Contains utility functions.
-- `public/`: Contains static assets.
-- `index.html`: The main HTML file.
-- `package.json`: Contains the project dependencies and scripts.
-- `tailwind.config.js`: Tailwind CSS configuration file.
-- `tsconfig.json`: TypeScript configuration file.
-- `.eslintrc.cjs`: ESLint configuration file.
-
-## License
-
-This project is licensed under the MIT License.
+```bash
+npm install
+```
