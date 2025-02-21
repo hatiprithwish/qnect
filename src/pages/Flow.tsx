@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, KeyboardEvent } from "react";
 import {
   ReactFlow,
   Background,
@@ -26,8 +26,8 @@ import useAuthStore from "../store/authStore";
 const Flow = ({
   initialNodes = [],
   initialEdges = [],
-  isEdit = false,
-}: {
+}: // isEdit = false,
+{
   initialNodes?: any[];
   initialEdges?: any[];
   isEdit?: boolean;
@@ -86,13 +86,34 @@ const Flow = ({
     event.dataTransfer.dropEffect = "move";
   }, []);
 
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "Delete" || event.key === "Backspace") {
+        const selectedNodes = nodes.filter((node) => node.selected);
+        if (selectedNodes.length > 0) {
+          setNodes(nodes.filter((node) => !node.selected));
+
+          // Remove any edges connected to deleted nodes
+          const nodeIds = selectedNodes.map((node) => node.id);
+          setEdges(
+            edges.filter(
+              (edge) =>
+                !nodeIds.includes(edge.source) && !nodeIds.includes(edge.target)
+            )
+          );
+        }
+      }
+    },
+    [nodes, edges, setNodes, setEdges]
+  );
+
   const handleSubmit = async () => {
     const flow = reactFlowRef && reactFlowRef.toObject();
     await createFlow({ flow });
   };
 
   return (
-    <div className="flex-1 w-full h-[90vh]">
+    <div className="flex-1 w-full h-[90vh]" onKeyDown={onKeyDown}>
       <ReactFlow
         onInit={setReactFlowRef}
         id="react-flow"

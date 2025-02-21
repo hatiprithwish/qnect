@@ -12,7 +12,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { cn } from "../../utils/cn";
 
 const colors = [
-  "transparent",
+  // "transparent",
   "#cf4c2c",
   "#ea9c41",
   "#ebc347",
@@ -84,7 +84,7 @@ const ShapeNode = ({
             )}
             style={{ backgroundColor: col }}
             onClick={() => setColor(col)}
-          ></button>
+          />
         ))}
       </NodeToolbar>
 
