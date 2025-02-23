@@ -12,9 +12,9 @@ const FlowLayout: React.FC<FlowLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-700 text-white">
       <Navbar />
-      <main className="flex">
+      <main className="flex relative">
         <LeftSidebar />
-        {children || <Outlet />}
+        <div className="flex-1">{children || <Outlet />}</div>
         <Feedbacks />
       </main>
     </div>

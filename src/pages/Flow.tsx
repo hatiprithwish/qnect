@@ -22,6 +22,9 @@ import { nodeTypes } from "../components/nodes";
 import { edgeTypes } from "../components/edges";
 import { createFlow } from "../services/apiService";
 import useAuthStore from "../store/authStore";
+import AIFlow from "../components/AIFlow";
+import Modal from "../components/ui/Modal";
+import useFlowStore from "../store/flowStore";
 
 const Flow = ({
   initialNodes = [],
@@ -39,6 +42,8 @@ const Flow = ({
     null
   );
   const { isLoading } = useAuthStore();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { aiFlow } = useFlowStore();
 
   const onConnect: OnConnect = useCallback(
     (connection) =>
@@ -88,7 +93,7 @@ const Flow = ({
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === "Delete" || event.key === "Backspace") {
+      if (event.key === "Delete") {
         const selectedNodes = nodes.filter((node) => node.selected);
         if (selectedNodes.length > 0) {
           setNodes(nodes.filter((node) => !node.selected));
@@ -139,11 +144,26 @@ const Flow = ({
           >
             {isLoading ? "Submitting..." : "Submit"}
           </button>
+          {aiFlow && (
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md font-medium cursor-pointer"
+            >
+              AI Feedback
+            </button>
+          )}
         </Panel>
         <Background />
-        <MiniMap />
+        {/* <MiniMap /> */}
         <Controls />
       </ReactFlow>
+      <Modal
+        title="AI Flow"
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <AIFlow />
+      </Modal>
     </div>
   );
 };

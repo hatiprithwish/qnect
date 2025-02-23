@@ -16,5 +16,9 @@ export const registerUser = (userData: RegisterRequest) =>
 
 export const createFlow = async (flowData: { [key: string]: any }) => {
   const response = await post("/flow", flowData);
-  useFlowStore.getState().setFeedback(response.data.data);
+  if (response.data?.feedback) {
+    useFlowStore.getState().setFeedback(response.data.feedback);
+  }
+  console.log(response.data);
+  useFlowStore.getState().setAIFlow(response.data?.data);
 };

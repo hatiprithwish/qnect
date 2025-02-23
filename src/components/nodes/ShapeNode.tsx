@@ -67,7 +67,9 @@ const ShapeNode = ({
     });
   };
 
-  const Component = SHAPES[data?.type].component;
+  console.log(data?.type);
+  const Component = SHAPES[data?.type].component || SHAPES["circle"].component;
+  console.log("Component", Component);
   return (
     <>
       <NodeToolbar
