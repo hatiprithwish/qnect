@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { AuthStore } from "../types/auth.type";
+import { AuthStore } from "qnect-types";
 
 const useAuthStore = create<AuthStore>()(
   persist(

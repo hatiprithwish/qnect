@@ -3,7 +3,6 @@ import {
   ReactFlow,
   Background,
   Controls,
-  MiniMap,
   addEdge,
   useEdgesState,
   type OnConnect,
@@ -154,13 +153,12 @@ const Flow = ({
           )}
         </Panel>
         <Background />
-        {/* <MiniMap /> */}
         <Controls />
       </ReactFlow>
       <Modal
-        title="AI Flow"
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        width="w-full"
       >
         <AIFlow />
       </Modal>

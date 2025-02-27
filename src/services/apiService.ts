@@ -1,6 +1,6 @@
+import { LoginRequest, RegisterRequest } from "qnect-types";
 import apiClient from "../api";
 import useFlowStore from "../store/flowStore";
-import { LoginRequest, RegisterRequest } from "../types/auth.type";
 
 export const get = (url: string, config = {}) => apiClient.get(url, config);
 export const post = (url: string, data: { [key: string]: any }, config = {}) =>

@@ -1,6 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { FlowStore } from "../types/flow.type";
+import { FlowStore } from "qnect-types";
 
 const useFlowStore = create<FlowStore>()(
   // persist(
