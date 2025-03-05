@@ -1,9 +1,12 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { LogOut, Box } from "lucide-react";
 import useAuthStore from "../../store/authStore";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  pageTitle?: string | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ pageTitle }) => {
   const { isAuthenticated, logout } = useAuthStore((state) => state);
 
   return (
@@ -12,17 +15,19 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2">
             <Box className="w-8 h-8 text-blue-500" />
-            <span className="text-xl font-bold">Qnect</span>
+            <span className="text-xl font-bold capitalize">
+              {pageTitle ? pageTitle : "Qnect"}
+            </span>
           </Link>
 
           <div className="flex items-center space-x-4">
             {isAuthenticated ? (
               <>
                 <Link
-                  to="/design"
+                  to="/problems"
                   className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  My Designs
+                  Problems
                 </Link>
                 <button
                   onClick={() => logout()}

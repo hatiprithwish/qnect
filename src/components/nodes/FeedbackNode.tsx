@@ -26,22 +26,28 @@ const FeedbackNode = ({ id, data }: FeedbackNodeProps) => {
         <p className="text-xs">{data.feedback}</p>
       )}
 
-      {[Position.Top, Position.Left, Position.Right, Position.Bottom].map(
-        (position) => {
-          return (
-            <Handle
-              key={`${id}-${position}`}
-              id={`${id}-${position}`}
-              type="source"
-              className={cn(
-                "z-50 w-1.5 h-1.5 bg-slate-800"
-                // selected ? "visible" : "invisible"
-              )}
-              position={position}
-            />
-          );
-        }
-      )}
+      {[Position.Right].map((position) => {
+        return (
+          <Handle
+            key={`${id}-${position}`}
+            id={`${id}-${position}`}
+            type="source"
+            className={cn("z-50 w-1.5 h-1.5 bg-slate-800")}
+            position={position}
+          />
+        );
+      })}
+      {[Position.Left].map((position) => {
+        return (
+          <Handle
+            key={`${id}-${position}`}
+            id={`${id}-${position}`}
+            type="target"
+            className={cn("z-50 w-1.5 h-1.5 bg-slate-800")}
+            position={position}
+          />
+        );
+      })}
     </div>
   );
 };

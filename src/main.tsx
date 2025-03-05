@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { ReactFlowProvider } from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

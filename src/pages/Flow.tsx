@@ -1,4 +1,4 @@
-import { useCallback, useState, KeyboardEvent } from "react";
+import { useCallback, useState, KeyboardEvent, useRef } from "react";
 import {
   ReactFlow,
   Background,
@@ -13,8 +13,9 @@ import {
   Panel,
   ReactFlowInstance,
   MarkerType,
+  reconnectEdge,
+  Edge,
 } from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
 import { nanoid } from "nanoid";
 import { icons } from "../constants";
 import { nodeTypes } from "../components/nodes";
@@ -24,6 +25,7 @@ import useAuthStore from "../store/authStore";
 import AIFlow from "../components/AIFlow";
 import Modal from "../components/ui/Modal";
 import useFlowStore from "../store/flowStore";
+import { useSearchParams } from "react-router-dom";
 
 const Flow = ({
   initialNodes = [],
@@ -40,9 +42,12 @@ const Flow = ({
   const [reactFlowRef, setReactFlowRef] = useState<ReactFlowInstance | null>(
     null
   );
+  const edgeReconnectSuccessful = useRef(true);
   const { isLoading } = useAuthStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { aiFlow } = useFlowStore();
+  const [searchParams] = useSearchParams();
+  const problemStatement: string | null = searchParams.get("problemStatement");
 
   const onConnect: OnConnect = useCallback(
     (connection) =>
@@ -90,6 +95,24 @@ const Flow = ({
     event.dataTransfer.dropEffect = "move";
   }, []);
 
+  // ----- Delete Edge on Drop -----
+  const onReconnectStart = useCallback(() => {
+    edgeReconnectSuccessful.current = false;
+  }, []);
+
+  const onReconnect = useCallback((oldEdge: Edge, newConnection: any) => {
+    edgeReconnectSuccessful.current = true;
+    setEdges((els) => reconnectEdge(oldEdge, newConnection, els));
+  }, []);
+
+  const onReconnectEnd = useCallback((_: unknown, edge: Edge) => {
+    if (!edgeReconnectSuccessful.current) {
+      setEdges((eds) => eds.filter((e) => e.id !== edge.id));
+    }
+
+    edgeReconnectSuccessful.current = true;
+  }, []);
+
   const onKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "Delete") {
@@ -112,8 +135,9 @@ const Flow = ({
   );
 
   const handleSubmit = async () => {
-    const flow = reactFlowRef && reactFlowRef.toObject();
-    await createFlow({ flow });
+    if (!reactFlowRef) return;
+    const flow = reactFlowRef.toObject();
+    await createFlow({ flowData: flow, problemStatement });
   };
 
   return (
@@ -126,6 +150,9 @@ const Flow = ({
         onNodesChange={onNodesChange as any} // TODO: Fix this type
         onEdgesChange={onEdgesChange as any} // TODO: Fix this type
         onConnect={onConnect}
+        onReconnect={onReconnect}
+        onReconnectStart={onReconnectStart}
+        onReconnectEnd={onReconnectEnd}
         onDrop={onDrop}
         onDragOver={onDragOver}
         connectionLineType={ConnectionLineType.Straight}

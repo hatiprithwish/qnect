@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Flow from "./pages/Flow";
 import { Toaster } from "react-hot-toast";
 import FlowLayout from "./layouts/FlowLayout";
+import Problems from "./pages/Problems";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="flow" element={<Flow />} />
+            <Route path="/problems" element={<Problems />} />
           </Route>
           <Route path="/flow" element={<FlowLayout />}>
             <Route index element={<Flow />} />

@@ -1,6 +1,7 @@
 import { LoginRequest, RegisterRequest } from "qnect-types";
 import apiClient from "../api";
 import useFlowStore from "../store/flowStore";
+import { ReactFlowJsonObject } from "@xyflow/react";
 
 export const get = (url: string, config = {}) => apiClient.get(url, config);
 export const post = (url: string, data: { [key: string]: any }, config = {}) =>
@@ -14,8 +15,14 @@ export const loginUser = (credentials: LoginRequest) =>
 export const registerUser = (userData: RegisterRequest) =>
   post("/auth/register", userData);
 
-export const createFlow = async (flowData: { [key: string]: any }) => {
-  const response = await post("/flow", flowData);
+export const createFlow = async ({
+  flowData,
+  problemStatement,
+}: {
+  flowData: ReactFlowJsonObject;
+  problemStatement?: string | null;
+}) => {
+  const response = await post("/flow", { flowData, problemStatement });
   if (response.data?.feedback) {
     useFlowStore.getState().setFeedback(response.data.feedback);
   }
