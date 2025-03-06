@@ -5,13 +5,14 @@ import {
   Position,
   useReactFlow,
 } from "@xyflow/react";
-import { cn } from "../../lib/utils";
+
 import { memo, useState } from "react";
-import { SHAPES } from "../Shapes";
+import { SHAPES } from "./Shapes";
 import { useDebouncedCallback } from "use-debounce";
+import { cn } from "../../utils/cn";
 
 const colors = [
-  "transparent",
+  // "transparent",
   "#cf4c2c",
   "#ea9c41",
   "#ebc347",
@@ -50,7 +51,24 @@ const ShapeNode = ({
     setSize({ width, height });
   }, 15);
 
-  const Component = SHAPES[data?.type].component;
+  const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newLabel = e.target.value;
+    setLabel(newLabel);
+    setNodes((nodes) => {
+      return nodes.map((node) => {
+        if (node.id === id) {
+          node.data = {
+            ...node.data,
+            label: newLabel,
+          };
+        }
+        return node;
+      });
+    });
+  };
+
+  const Component = SHAPES[data?.type].component || SHAPES["circle"].component;
+  console.log("Component", Component);
   return (
     <>
       <NodeToolbar
@@ -67,7 +85,7 @@ const ShapeNode = ({
             )}
             style={{ backgroundColor: col }}
             onClick={() => setColor(col)}
-          ></button>
+          />
         ))}
       </NodeToolbar>
 
@@ -85,8 +103,8 @@ const ShapeNode = ({
         (position) => {
           return (
             <Handle
-              key={`source-${position}`}
-              id={`source-${position}`}
+              key={`${id}-${position}`}
+              id={`${id}-${position}`}
               type="source"
               className={cn(
                 "z-50 w-1.5 h-1.5",
@@ -103,7 +121,7 @@ const ShapeNode = ({
         type="text"
         value={label}
         placeholder={data?.type}
-        onChange={(e) => setLabel(e.target.value)}
+        onChange={handleLabelChange}
         className="w-full absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center text-[0.5rem] bg-transparent focus:outline-none"
       />
     </>

@@ -1,6 +1,6 @@
 import { DragEvent, useRef } from "react";
-import { SHAPES } from "./Shapes";
-import { icons } from "../constants";
+import { SHAPES } from "../nodes/Shapes";
+import { icons } from "../../constants";
 
 const LeftSidebar = () => {
   const onDragStart = (
@@ -15,7 +15,7 @@ const LeftSidebar = () => {
     }
   };
   return (
-    <div className="w-64 p-4 md:px-8 max-h-screen bg-blue-50">
+    <div className="w-64 p-4 md:px-8 max-h-screen bg-gray-800 border-r border-gray-700">
       <h4 className="text-xl font-semibold pb-0.5 border-b-[1px] border-b-slate-300">
         Drag and Drop
       </h4>

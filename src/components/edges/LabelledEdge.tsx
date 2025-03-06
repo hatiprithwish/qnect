@@ -91,7 +91,7 @@ export default function LabelledEdge({
             onChange={handleLabelInput}
             value={edgeLabel}
             placeholder="[ ]"
-            className="bg-[#e2e8f0] text-center min-w-3"
+            className="bg-[#e2e8f0] text-black text-center min-w-3 rounded-[2px]"
             type="text"
           />
         </div>

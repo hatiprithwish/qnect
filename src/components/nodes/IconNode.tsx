@@ -1,7 +1,7 @@
 import { Handle, NodeResizer, Position, useReactFlow } from "@xyflow/react";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { cn } from "../../lib/utils";
+import { cn } from "../../utils/cn";
 
 const IconNode = ({
   id,
@@ -53,8 +53,8 @@ const IconNode = ({
         (position) => {
           return (
             <Handle
-              key={`source-${position}`}
-              id={`source-${position}`}
+              key={`${id}-${position}`}
+              id={`${id}-${position}`}
               type="source"
               className={cn(
                 "z-50 w-1.5 h-1.5 bg-slate-800",

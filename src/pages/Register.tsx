@@ -1,49 +1,66 @@
-import { LogIn } from "lucide-react";
+import { UserPlus } from "lucide-react";
+import { registerUser } from "../services/apiService";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
-import { useState } from "react";
-import { loginUser } from "../services/apiService";
 import { cn } from "../utils/cn";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendEmailVerification, signInWithCustomToken } from "firebase/auth";
 import { auth } from "../config/firebase";
 
-const Login = () => {
-  const { isLoading, setIsLoading, login } = useAuthStore();
+const Register = () => {
+  const { isLoading, login } = useAuthStore();
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
+    name: "",
     email: "",
     password: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setIsLoading(true);
     e.preventDefault();
-
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      formState.email,
-      formState.password
-    );
-    const token = await userCredential?.user?.getIdToken();
-
-    await loginUser({
-      token,
-    }).then((res) => {
-      login({ user: res?.data?.user, token });
-      navigate("/flow");
+    const response = await registerUser({
+      name: formState.name,
+      email: formState.email,
+      password: formState.password,
     });
 
-    setIsLoading(false);
+    const userCredential = await signInWithCustomToken(
+      auth,
+      response?.data?.customToken
+    );
+
+    await sendEmailVerification(userCredential?.user);
+    login({
+      user: response?.data?.user,
+      token: userCredential?.user?.refreshToken,
+    });
+    navigate("/flow");
   };
+
   return (
     <div className="max-w-md mx-auto">
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
         <div className="text-center mb-8">
-          <LogIn className="w-12 h-12 text-blue-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold">Welcome Back</h2>
+          <UserPlus className="w-12 h-12 text-blue-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold">Create an Account</h2>
         </div>
 
         <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-sm font-medium mb-1">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={formState.name}
+              onChange={(e) =>
+                setFormState({ ...formState, name: e.target.value })
+              }
+              className="w-full px-3 py-2 bg-gray-700 rounded-md border border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500/20"
+              required
+            />
+          </div>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium mb-1">
               Email
@@ -87,14 +104,14 @@ const Login = () => {
               isLoading && "opacity-50"
             )}
           >
-            {isLoading ? "Loading..." : "Login"}
+            {isLoading ? "Creating Account..." : "Create Account"}
           </button>
         </form>
 
         <p className="mt-4 text-center text-sm text-gray-400">
-          Don't have an account?{" "}
-          <Link to="/register" className="text-blue-500 hover:text-blue-400">
-            Register
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-500 hover:text-blue-400">
+            Login
           </Link>
         </p>
       </div>
@@ -102,4 +119,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

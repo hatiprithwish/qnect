@@ -24,3 +24,18 @@ export const icons = [
   "Redis",
   "Vercel",
 ];
+
+export const problemStatements = [
+  "Design a Rate Limiter",
+  "Design Consistent Hashing",
+  "Design a Key-Value Store",
+  "Design a Unique ID Generator in Distributed Systems",
+  "Design a URL Shortener",
+  "Design a Web Crawler",
+  "Design a Notification System",
+  "Design a News Feed System",
+  "Design a Chat System",
+  "Design a Search Autocomplete System",
+  "Design YouTube",
+  "Design Google Drive",
+];
