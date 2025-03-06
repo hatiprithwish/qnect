@@ -1,15 +1,15 @@
 ##### Backend Repo: https://github.com/hatiprithwish/qnect_server
 
-# Qnect
+# Qnect - The System Design Judge
 
-Qnect is a web application that allows users to create, save, and share flowcharts. It provides a drag-and-drop interface for adding various shapes and icons to the flowchart, and supports exporting the flowchart in different formats.
+System Design Hub is a curated collection of industry-relevant system design problems that helps software engineers prepare for technical interviews and improve their architecture skills. Each problem includes detailed requirements, constraints, and expert-guided solutions.
 
 ## Features
 
-- **Drag and Drop**: Easily add shapes and icons to the flowchart by dragging and dropping them from the sidebar.
-- **Save and Restore**: Save your flowchart progress and restore it later.
-- **Export**: Export the flowchart as JPEG, PNG, or SVG.
-- **Share**: Generate a shareable link for your flowchart.
+- 🚀 Top System Design Questions: Carefully selected problems covering various domains and complexity levels
+- 🤖 AI-Powered Feedback: Get intelligent suggestions to improve your design solutions
+- 📈 Scalability Focus: Learn how to design systems that can handle growth and high loads
+- 🔄 Real-world Scenarios: Practice with problems based on actual production systems
 
 ## Installation
 
