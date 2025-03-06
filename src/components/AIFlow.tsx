@@ -2,18 +2,18 @@ import Dagre from "@dagrejs/dagre";
 import {
   ConnectionLineType,
   Edge,
+  MarkerType,
   Node,
-  Panel,
   Position,
   ReactFlow,
+  ReactFlowProvider,
   useEdgesState,
   useNodesState,
-  useReactFlow,
 } from "@xyflow/react";
 import useFlowStore from "../store/flowStore";
 import { nodeTypes } from "./nodes";
 import { edgeTypes } from "./edges";
-import { useCallback } from "react";
+import { useEffect } from "react";
 
 enum Direction {
   TopToBottom = "TB",
@@ -25,7 +25,7 @@ enum Direction {
 const getLayoutedElements = (
   nodes: Node[],
   edges: Edge[],
-  direction = Direction.TopToBottom
+  direction = Direction.LeftToRight
 ) => {
   const dagreGraph = new Dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -34,11 +34,20 @@ const getLayoutedElements = (
     direction === Direction.LeftToRight || direction === Direction.RightToLeft;
   dagreGraph.setGraph({ rankdir: direction });
 
+  dagreGraph.setGraph({
+    rankdir: direction,
+    nodesep: 100, // Horizontal spacing between nodes in the same rank
+    ranksep: 120, // Vertical spacing between ranks
+    edgesep: 80, // Minimum separation between adjacent edges
+    marginx: 50,
+    marginy: 50,
+  });
+
   // Add nodes to the graph
   nodes.forEach((node) => {
     dagreGraph.setNode(node.id, {
-      width: 150,
-      height: 50,
+      width: 180,
+      height: 60,
     });
   });
 
@@ -68,52 +77,47 @@ const getLayoutedElements = (
 };
 
 const AIFlow = () => {
-  const { fitView } = useReactFlow();
   const { aiFlow } = useFlowStore();
   const [nodes, setNodes] = useNodesState(aiFlow?.nodes || []);
   const [edges, setEdges] = useEdgesState(aiFlow?.edges || []);
 
-  const onLayout = useCallback(
-    (direction: Direction) => {
-      const { nodes: layoutedNodes, edges: layoutedEdges } =
-        getLayoutedElements(nodes, edges, direction);
+  useEffect(() => {
+    if (nodes.length > 0 && edges.length > 0) {
+      // Small delay to ensure ReactFlow is fully mounted
+      const timer = setTimeout(() => {
+        const { nodes: layoutedNodes, edges: layoutedEdges } =
+          getLayoutedElements(nodes, edges);
 
-      setNodes([...layoutedNodes]);
-      setEdges([...layoutedEdges]);
+        setNodes([...layoutedNodes]);
+        setEdges([...layoutedEdges]);
+      }, 10);
 
-      window.requestAnimationFrame(() => {
-        fitView();
-      });
-    },
-    [nodes, edges, fitView]
-  );
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
+  console.log("edges: ", edges);
   return (
-    <div className="w-full mx-auto h-[90vh]">
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        // onDragOver={onDragOver}
-        snapToGrid={true}
-        snapGrid={[15, 15]}
-        connectionLineType={ConnectionLineType.Step}
-        nodeTypes={nodeTypes as any} // TODO: Fix this type
-        edgeTypes={edgeTypes}
-        fitView
-        colorMode="dark"
-        connectionMode={"loose" as any}
-        draggable={true}
-        attributionPosition="bottom-left"
-      >
-        <Panel position="top-right">
-          <button
-            onClick={() => onLayout(Direction.TopToBottom)}
-            className="bg-blue-500 text-white px-4 py-2 rounded font-semibold"
-          >
-            Vertical Layout
-          </button>
-        </Panel>
-      </ReactFlow>
+    <div
+      className="w-full mx-auto h-[90vh]"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <ReactFlowProvider>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          connectionLineType={ConnectionLineType.SmoothStep}
+          nodeTypes={nodeTypes as any} // TODO: Fix this type
+          edgeTypes={edgeTypes}
+          colorMode="dark"
+          connectionMode={"loose" as any}
+          defaultEdgeOptions={{
+            type: "smoothstep",
+            markerEnd: { type: MarkerType.Arrow },
+          }}
+          defaultViewport={{ x: 0, y: 200, zoom: 0.75 }}
+        ></ReactFlow>
+      </ReactFlowProvider>
     </div>
   );
 };

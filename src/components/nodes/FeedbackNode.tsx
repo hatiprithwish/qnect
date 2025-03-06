@@ -1,5 +1,4 @@
 import { Handle, Position } from "@xyflow/react";
-import { cn } from "../../utils/cn";
 
 type FeedbackNodeProps = {
   id: string;
@@ -26,28 +25,32 @@ const FeedbackNode = ({ id, data }: FeedbackNodeProps) => {
         <p className="text-xs">{data.feedback}</p>
       )}
 
-      {[Position.Right].map((position) => {
-        return (
-          <Handle
-            key={`${id}-${position}`}
-            id={`${id}-${position}`}
-            type="source"
-            className={cn("z-50 w-1.5 h-1.5 bg-slate-800")}
-            position={position}
-          />
-        );
-      })}
-      {[Position.Left].map((position) => {
-        return (
-          <Handle
-            key={`${id}-${position}`}
-            id={`${id}-${position}`}
-            type="target"
-            className={cn("z-50 w-1.5 h-1.5 bg-slate-800")}
-            position={position}
-          />
-        );
-      })}
+      {[Position.Top, Position.Bottom, Position.Right, Position.Left].map(
+        (position) => {
+          return (
+            <Handle
+              key={`${id}-${position}`}
+              id={`${id}-${position}`}
+              type="source"
+              className={"z-50 w-1.5 h-1.5 bg-slate-800 invisible"}
+              position={position}
+            />
+          );
+        }
+      )}
+      {[Position.Top, Position.Bottom, Position.Right, Position.Left].map(
+        (position) => {
+          return (
+            <Handle
+              key={`${id}-${position}`}
+              id={`${id}-${position}`}
+              type="target"
+              className={"z-50 w-1.5 h-1.5 bg-slate-800 invisible"}
+              position={position}
+            />
+          );
+        }
+      )}
     </div>
   );
 };
