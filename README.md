@@ -1,48 +1,63 @@
-# Qnect - System Design Judge
+##### Backend Repo: https://github.com/hatiprithwish/qnect_server
 
-A web-based platform that allows developers to create, visualize and validate system design diagrams with AI-powered feedback.
+# Qnect - The System Design Judge
 
-## Overview
-
-Qnect is an interactive system design tool that helps developers:
-
-- Create system architecture diagrams with an intuitive drag-and-drop interface
-- Use pre-built components like API Gateways, Databases, Load Balancers etc.
-- Get real-time AI feedback on design patterns, scalability and best practices
-- Learn system design through detailed recommendations and improvements
+System Design Hub is a curated collection of industry-relevant system design problems that helps software engineers prepare for technical interviews and improve their architecture skills. Each problem includes detailed requirements, constraints, and expert-guided solutions.
 
 ## Features
 
-### Component Library
+- 🚀 Top System Design Questions: Carefully selected problems covering various domains and complexity levels
+- 🤖 AI-Powered Feedback: Get intelligent suggestions to improve your design solutions
+- 📈 Scalability Focus: Learn how to design systems that can handle growth and high loads
+- 🔄 Real-world Scenarios: Practice with problems based on actual production systems
 
-- Extensive collection of common system design components including:
-  - Infrastructure (AWS, Azure, GCP, Kubernetes)
-  - Databases (MongoDB, PostgreSQL, Redis)
-  - Network (Load Balancer, API Gateway, CDN)
-  - And many more...
+## Installation
 
-### Interactive Design Canvas
+1. Clone the repository:
 
-- Drag-and-drop interface using [ReactFlow](https://reactflow.dev)
-- Connect components with labeled edges
-- Resize and customize components
-- Mini-map for easy navigation
-- Zoom and pan controls
+   ```sh
+   git clone https://github.com/yourusername/qnect.git
+   cd qnect/qnect-client
+   ```
 
-### AI Design Evaluation
+2. Install dependencies:
 
-The backend evaluates designs and provides feedback on:
+   ```sh
+   npm install
+   ```
 
-- Must-have components for the system
-- Good-to-have components for scalability
-- Prohibited component connections
-- Recommended connection patterns
-- Best practices and improvements
+3. Create a `.env.local` file in the root directory and add the following environment variables:
 
-## Getting Started
+   ```env
+   VITE_CLIENT_URL=http://localhost:5173/
+   VITE_SERVER_URL=http://localhost:5994/api/v1/
+   ```
 
-1. Install dependencies:
+4. Start the development server:
+   ```sh
+   npm run dev
+   ```
 
-```bash
-npm install
-```
+## Usage
+
+1. Open your browser and navigate to `http://localhost:5173`.
+2. Use the sidebar to drag and drop shapes and icons onto the canvas.
+3. Save your progress, export the flowchart, or generate a shareable link using the top bar.
+
+## Project Structure
+
+- `src/`: Contains the source code for the application.
+  - `components/`: Contains React components used in the application.
+  - `pages/`: Contains the main pages of the application.
+  - `constants/`: Contains constant values used throughout the application.
+  - `lib/`: Contains utility functions.
+- `public/`: Contains static assets.
+- `index.html`: The main HTML file.
+- `package.json`: Contains the project dependencies and scripts.
+- `tailwind.config.js`: Tailwind CSS configuration file.
+- `tsconfig.json`: TypeScript configuration file.
+- `.eslintrc.cjs`: ESLint configuration file.
+
+## License
+
+This project is licensed under the MIT License.
