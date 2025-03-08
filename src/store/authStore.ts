@@ -26,7 +26,13 @@ const useAuthStore = create<AuthStore>()(
           token: null,
         }),
     }),
-    { name: "auth-storage" }
+    {
+      name: "auth-storage",
+      partialize: (state) => {
+        const { isLoading, ...rest } = state;
+        return rest;
+      },
+    }
   )
 );
 
