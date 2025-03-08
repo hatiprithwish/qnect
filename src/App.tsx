@@ -8,6 +8,7 @@ import Flow from "./pages/Flow";
 import { Toaster } from "react-hot-toast";
 import FlowLayout from "./layouts/FlowLayout";
 import Problems from "./pages/Problems";
+import ProtectedRoute from "./components/shared/ProtectedRoute";
 
 function App() {
   return (
@@ -22,12 +23,18 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="flow" element={<Flow />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/problems" element={<Problems />} />
           </Route>
-          <Route path="/flow" element={<FlowLayout />}>
+          <Route
+            path="/flow"
+            element={
+              <ProtectedRoute>
+                <FlowLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Flow />} />
           </Route>
         </Routes>
