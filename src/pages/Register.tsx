@@ -6,6 +6,7 @@ import useAuthStore from "../store/authStore";
 import { cn } from "../utils/cn";
 import { sendEmailVerification, signInWithCustomToken } from "firebase/auth";
 import { auth } from "../config/firebase";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { isLoading, login } = useAuthStore();
@@ -26,8 +27,13 @@ const Register = () => {
 
     const userCredential = await signInWithCustomToken(
       auth,
-      response?.data?.customToken
+      response?.data?.data?.emailVerificationToken
     );
+
+    if (!userCredential) {
+      toast.error("Something went wrong while logging in");
+      return;
+    }
 
     await sendEmailVerification(userCredential?.user);
     login({
