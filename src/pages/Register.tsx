@@ -18,29 +18,27 @@ const Register = () => {
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const response = await registerUser({
-      name: formState.name,
-      email: formState.email,
-      password: formState.password,
-    });
-
-    const userCredential = await signInWithCustomToken(
-      auth,
-      response?.data?.data?.emailVerificationToken
-    );
-
-    if (!userCredential) {
-      toast.error("Something went wrong while logging in");
-      return;
+    try {
+      e.preventDefault();
+      const response = await registerUser({
+        name: formState.name,
+        email: formState.email,
+        password: formState.password,
+      });
+      const userCredential = await signInWithCustomToken(
+        auth,
+        response?.data?.data?.emailVerificationToken
+      );
+      await sendEmailVerification(userCredential?.user);
+      login({
+        user: response?.data?.user,
+        token: userCredential?.user?.refreshToken,
+      });
+      navigate("/flow");
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong while creating an account");
     }
-
-    await sendEmailVerification(userCredential?.user);
-    login({
-      user: response?.data?.user,
-      token: userCredential?.user?.refreshToken,
-    });
-    navigate("/flow");
   };
 
   return (

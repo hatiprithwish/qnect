@@ -6,6 +6,7 @@ import { loginUser } from "../services/apiService";
 import { cn } from "../utils/cn";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { isLoading, setIsLoading, login } = useAuthStore();
@@ -16,24 +17,29 @@ const Login = () => {
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setIsLoading(true);
-    e.preventDefault();
-
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      formState.email,
-      formState.password
-    );
-    const token = await userCredential?.user?.getIdToken();
-
-    await loginUser({
-      token,
-    }).then((res) => {
-      login({ user: res?.data?.user, token });
-      navigate("/flow");
-    });
-
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      e.preventDefault();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        formState.email,
+        formState.password
+      );
+      const token = await userCredential?.user?.getIdToken();
+      await loginUser({
+        token,
+      }).then((res) => {
+        login({ user: res?.data?.user, token });
+        navigate("/flow");
+      });
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+      toast.error("Something went wrong while logging in");
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <div className="max-w-md mx-auto">
