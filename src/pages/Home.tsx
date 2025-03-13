@@ -16,14 +16,12 @@ const Home: React.FC = () => {
           Create, share, and collaborate on system design diagrams with our
           powerful and intuitive platform.
         </p>
-        {!isAuthenticated && (
-          <Link
-            to="/register"
-            className="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium"
-          >
-            Get Started <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        )}
+        <Link
+          to={isAuthenticated ? "/problems" : "/oauth"}
+          className="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium"
+        >
+          Get Started <ArrowRight className="ml-2 w-5 h-5" />
+        </Link>
       </div>
 
       {/* Features Section */}

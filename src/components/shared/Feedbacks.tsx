@@ -24,6 +24,10 @@ const Feedbacks = () => {
           } p-2 h-[90vh] overflow-y-auto bg-gray-800 border-r border-gray-700`}
         >
           <h2 className="text-xl font-bold text-center">Feedbacks</h2>
+          <p className="text-xs text-gray-300 mt-2">
+            💡Starting Tip: Your design need to have client, server, database,
+            cache and load balancer properly connected at least.
+          </p>
 
           {feedback.requiredNodes.length > 0 && (
             <div className="mt-2">
@@ -98,7 +102,7 @@ const Feedbacks = () => {
           {aiFlow && (
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-white hover:bg-gray-100 text-black py-2 px-4 rounded-md font-medium cursor-pointer mx-auto"
+              className="bg-white hover:bg-gray-100 text-black py-2 px-4 rounded-md font-medium cursor-pointer mx-auto mt-4 w-full"
             >
               AI Feedback
             </button>
