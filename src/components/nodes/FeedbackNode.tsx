@@ -14,7 +14,8 @@ const FeedbackNode = ({ id, data }: FeedbackNodeProps) => {
     <div className="max-w-56 text-white bg-slate-900 p-2 rounded-lg">
       <div className="flex items-center justify-center gap-3">
         <img
-          src={`/icons/${data?.label.split(" ").join("-").toLowerCase()}.webp`}
+          // src={`/icons/${data?.label.split(" ").join("-").toLowerCase()}.webp`}
+          src="/icons/monitoring-system.webp"
           width={25}
           height="auto"
           className="rounded"

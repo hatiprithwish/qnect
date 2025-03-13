@@ -5,7 +5,7 @@ function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { isAuthenticated } = useAuthStore();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/oauth" replace />;
   }
 
   return children;

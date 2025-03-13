@@ -5,7 +5,7 @@ import { useState } from "react";
 import { loginUser } from "../services/apiService";
 import { cn } from "../utils/cn";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "../config/firebase.config";
 import toast from "react-hot-toast";
 
 const Login = () => {

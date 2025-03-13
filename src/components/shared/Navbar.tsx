@@ -40,17 +40,17 @@ const Navbar: React.FC<NavbarProps> = ({ pageTitle }) => {
             ) : (
               <>
                 <Link
-                  to="/login"
-                  className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  to="/oauth"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium"
                 >
                   Login
                 </Link>
-                <Link
+                {/* <Link
                   to="/register"
                   className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium"
                 >
                   Register
-                </Link>
+                </Link> */}
               </>
             )}
           </div>

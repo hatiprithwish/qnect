@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import FlowLayout from "./layouts/FlowLayout";
 import Problems from "./pages/Problems";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
+import OAuth from "./pages/OAuth";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/oauth" element={<OAuth />} />
             <Route path="/problems" element={<Problems />} />
           </Route>
           <Route

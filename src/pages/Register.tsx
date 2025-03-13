@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import { cn } from "../utils/cn";
 import { sendEmailVerification, signInWithCustomToken } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "../config/firebase.config";
 import toast from "react-hot-toast";
 
 const Register = () => {

@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import toast from "react-hot-toast";
 import useAuthStore from "../store/authStore";
-import { auth } from "../config/firebase";
+import { auth } from "../config/firebase.config";
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_SERVER_URL,
