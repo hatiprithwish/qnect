@@ -30,7 +30,10 @@ const Navbar: React.FC<NavbarProps> = ({ pageTitle }) => {
                   Problems
                 </Link>
                 <button
-                  onClick={() => logout()}
+                  onClick={() => {
+                    logout();
+                    localStorage.clear();
+                  }}
                   className="flex items-center space-x-2 text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <LogOut className="w-4 h-4" />
