@@ -34,7 +34,7 @@ const Register = () => {
         user: response?.data?.user,
         token: userCredential?.user?.refreshToken,
       });
-      navigate("/flow");
+      navigate("/problems");
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong while creating an account");

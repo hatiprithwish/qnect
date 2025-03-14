@@ -31,7 +31,7 @@ const OAuth = () => {
       toast.success(`Welcome, ${user.displayName || "User"}!`);
 
       // Redirect to your app's main page
-      navigate("/flow");
+      navigate("/problems");
     } catch (error: any) {
       console.error("Google sign-in error:", error);
       toast.error(error.message || "Failed to sign in with Google");

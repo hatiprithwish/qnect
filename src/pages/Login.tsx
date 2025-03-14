@@ -30,7 +30,7 @@ const Login = () => {
         token,
       }).then((res) => {
         login({ user: res?.data?.user, token });
-        navigate("/flow");
+        navigate("/problems");
       });
       setIsLoading(false);
     } catch (error) {
