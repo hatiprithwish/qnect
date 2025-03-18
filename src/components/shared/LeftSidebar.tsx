@@ -46,7 +46,7 @@ const LeftSidebar = () => {
 
       <div className="mt-8">
         <h4 className="text-xl font-semibold pb-0.5 border-b-[1px] border-b-slate-300 !mt-10">
-          Icons
+          Icons (Beta)
         </h4>
         <div className="flex flex-wrap gap-2 mt-2">
           {icons.map((item) => {
