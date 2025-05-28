@@ -27,8 +27,7 @@ import { useSearchParams } from "react-router-dom";
 const Flow = ({
   initialNodes = [],
   initialEdges = [],
-}: // isEdit = false,
-{
+}: {
   initialNodes?: any[];
   initialEdges?: any[];
   isEdit?: boolean;

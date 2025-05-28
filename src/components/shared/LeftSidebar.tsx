@@ -1,6 +1,5 @@
 import { DragEvent, useRef } from "react";
 import { SHAPES } from "../nodes/Shapes";
-import { icons } from "../../constants";
 
 const LeftSidebar = () => {
   const onDragStart = (
@@ -15,11 +14,8 @@ const LeftSidebar = () => {
     }
   };
   return (
-    <div className="w-64 p-4 md:px-8 max-h-screen bg-gray-800 border-r border-gray-700">
-      <h4 className="text-xl font-semibold pb-0.5 border-b-[1px] border-b-slate-300">
-        Drag and Drop
-      </h4>
-      <div className="flex flex-wrap gap-2 mt-2">
+    <div className="absolute top-[20%] left-4 z-10 p-4 h-fit bg-gray-900 rounded-lg border border-gray-500">
+      <div className="flex flex-col gap-4">
         {Object.keys(SHAPES).map((shape_type) => {
           const Icon = SHAPES[shape_type].icon;
           const Component = SHAPES[shape_type].component;
@@ -42,46 +38,6 @@ const LeftSidebar = () => {
             </div>
           );
         })}
-      </div>
-
-      <div className="mt-8">
-        <h4 className="text-xl font-semibold pb-0.5 border-b-[1px] border-b-slate-300 !mt-10">
-          Icons (Beta)
-        </h4>
-        <div className="flex flex-wrap gap-2 mt-2">
-          {icons.map((item) => {
-            const ref = useRef<HTMLDivElement>(null);
-            return (
-              <div
-                key={item}
-                onDragStart={(event) => onDragStart(event, item, ref)}
-                draggable
-              >
-                <img
-                  src={`/icons/${item.split(" ").join("-").toLowerCase()}.webp`}
-                  width={30}
-                  height={30}
-                  alt={item}
-                />
-                <div
-                  ref={ref}
-                  key={item}
-                  className="translate-x-0 translate-y-0 absolute -top-96 -left-96"
-                >
-                  <img
-                    src={`/icons/${item
-                      .split(" ")
-                      .join("-")
-                      .toLowerCase()}.webp`}
-                    width={100}
-                    height={100}
-                    alt={item}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
     </div>
   );

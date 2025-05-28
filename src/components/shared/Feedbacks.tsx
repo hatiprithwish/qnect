@@ -3,6 +3,7 @@ import useFlowStore from "../../store/flowStore";
 import { useState } from "react";
 import Modal from "../ui/Modal";
 import AIFlow from "../AIFlow";
+import Requirements from "../Requirements";
 
 const Feedbacks = () => {
   const { feedback, aiFlow } = useFlowStore();
@@ -23,6 +24,7 @@ const Feedbacks = () => {
             isCollapsed ? "w-0 opacity-0 overflow-hidden" : "w-72 opacity-100"
           } p-2 h-[90vh] overflow-y-auto bg-gray-800 border-r border-gray-700`}
         >
+          <Requirements />
           <h2 className="text-xl font-bold text-center">Feedbacks</h2>
           <p className="text-xs text-gray-300 mt-2">
             💡Starting Tip: Your design need to have client, server, database,

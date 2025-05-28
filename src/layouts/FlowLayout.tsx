@@ -12,9 +12,9 @@ const FlowLayout: React.FC<FlowLayoutProps> = ({ children }) => {
   const [searchParams] = useSearchParams();
   const problemStatement: string | null = searchParams.get("problemStatement");
   return (
-    <div className="min-h-screen bg-gray-700 text-white">
+    <div className="min-h-screen bg-black text-white">
       <Navbar pageTitle={problemStatement?.split("-").join(" ")} />
-      <main className="flex relative">
+      <main className="flex items-center relative">
         <LeftSidebar />
         <div className="flex-1">{children || <Outlet />}</div>
         <Feedbacks />

@@ -8,14 +8,14 @@ const Problems = () => {
       <div className="list-decimal list-inside flex flex-wrap gap-4 justify-center items-stretch">
         {problemStatements.map((problem, index) => (
           <Link
-            to={`/flow?problemStatement=${problem
+            to={`/flow?problemStatement=${problem.title
               .split(" ")
               .join("-")
               .toLowerCase()}`}
             key={index}
             className="p-4 bg-blue-950 rounded-lg w-52 flex flex-col justify-center cursor-pointer hover:bg-blue-900"
           >
-            {problem}
+            {problem.title}
           </Link>
         ))}
       </div>

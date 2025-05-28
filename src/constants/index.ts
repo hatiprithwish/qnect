@@ -26,16 +26,30 @@ export const icons = [
 ];
 
 export const problemStatements = [
-  "Design a Rate Limiter",
-  "Design Consistent Hashing",
-  "Design a Key-Value Store",
-  "Design a Unique ID Generator in Distributed Systems",
-  "Design a URL Shortener",
-  "Design a Web Crawler",
-  "Design a Notification System",
-  "Design a News Feed System",
-  "Design a Chat System",
-  "Design a Search Autocomplete System",
-  "Design YouTube",
-  "Design Google Drive",
+  { title: "Design a Rate Limiter", requirements: [] },
+  { title: "Design Consistent Hashing", requirements: [] },
+  {
+    title: "Design a Key Value Store",
+    requirements: [
+      "The size of a key-value pair is small: less than 10 KB.",
+      "Ability to store big data.",
+      "High availability: The system responds quickly, even during failures.",
+      "High scalability: The system can be scaled to support large data set.",
+      "Automatic scaling: The addition/deletion of servers should be automatic based on traffic.",
+      "Tunable consistency.",
+      "Low latency.",
+    ],
+  },
+  {
+    title: "Design a Unique ID Generator in Distributed Systems",
+    requirements: [],
+  },
+  { title: "Design a URL Shortener", requirements: [] },
+  { title: "Design a Web Crawler", requirements: [] },
+  { title: "Design a Notification System", requirements: [] },
+  { title: "Design a News Feed System", requirements: [] },
+  { title: "Design a Chat System", requirements: [] },
+  { title: "Design a Search Autocomplete System", requirements: [] },
+  { title: "Design YouTube", requirements: [] },
+  { title: "Design Google Drive", requirements: [] },
 ];
